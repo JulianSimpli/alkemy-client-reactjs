@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+/**Layout */
+import Header from './components/layout/Header';
+import Nav from './components/layout/Nav';
+/**Components */
+import NewTransaction from './components/transactions/NewTransaction';
+import EditTransaction from './components/transactions/EditTransaction';
+import Transactions from './components/transactions/Transactions';
+import Expenses from './components/transactions/Expenses';
+import Income from './components/transactions/Income';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <Fragment>
+        <Header />
+        <div className="grid container main-content">
+          <Nav />
+          <main className="box-content col-9">
+            <Switch>
+              <Route exact path="/" component={Transactions} />
+              <Route exact path="/new-transaction" component={NewTransaction} />
+              <Route exact path="/edit-transaction/:id" component={EditTransaction} />
+              <Route exact path="/income" component={Income} />
+              <Route exact path="/expenses" component={Expenses} />
+            </Switch>
+          </main>
+        </div>
+      </Fragment>
+    </Router>
+  )
 }
 
 export default App;
